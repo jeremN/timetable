@@ -1,118 +1,359 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-
-const inter = Inter({ subsets: ['latin'] })
+import Head from 'next/head';
+import NextLink from 'next/link';
+import {
+	Heading,
+	Flex,
+	Card,
+	CardBody,
+	Box,
+	Button,
+	Text,
+	CardHeader,
+	TableContainer,
+	Table,
+	Tbody,
+	Td,
+	Th,
+	Thead,
+	Tr,
+	ButtonGroup,
+	Tag,
+	Divider,
+	CardFooter,
+	Icon
+} from '@chakra-ui/react';
+import {
+	MdCalendarMonth,
+	MdDeleteForever,
+	MdEditDocument,
+	MdOutlineAdd,
+	MdOutlineFileDownload,
+	MdEditCalendar,
+	MdGroups
+} from 'react-icons/md';
+import { FiUsers } from 'react-icons/fi';
 
 export default function Home() {
-  return (
-    <main
-      className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
-    >
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/pages/index.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+	return (
+		<>
+			<Head>
+				<title>Dashboard</title>
+				<meta name="description" content="Homepage" />
+			</Head>
+			<Box pt={3} w={'100%'} h={'100%'}>
+				<Card padding={4} backgroundColor={'#D6EAF7'}>
+					<CardHeader p={0}>
+						<Heading size="md">Bonjour Johanna !</Heading>
+					</CardHeader>
+					<CardBody pt={2} pl={0} pr={0} pb={0}>
+						<Text w={'30%'}>
+							Bienvenue sur votre dashboard. Ici vous pouvez accéder à vos derniers plannings et
+							gérer vos collaborateurs.
+						</Text>
+					</CardBody>
+				</Card>
+				<Box pt={14}>
+					<Flex gap={4}>
+						<Box flex={1}>
+							<Heading
+								size="md"
+								color={'#292448'}
+								marginBottom={4}
+								minH={'40px'}
+								display={'flex'}
+								alignItems={'center'}
+								justifyContent={'space-between'}>
+								Plannings{' '}
+								<Button
+									background="none"
+									color="#292448"
+									border="2px solid #292448"
+									borderRadius={20}
+									size="md"
+									fontSize={'1rem'}
+									className="justify-self-end">
+									Gérer
+								</Button>
+							</Heading>
+							<Card p={4} borderRadius={'8px'}>
+								<CardBody gap={2} flex={1}>
+									<Flex justifyContent={'space-between'} alignItems={'center'}>
+										<Flex alignItems={'center'}>
+											<Box
+												display="flex"
+												alignItems="center"
+												justifyContent="center"
+												w="12"
+												h="12"
+												backgroundColor="#292448"
+												borderRadius="50%"
+												mr={4}>
+												<Icon as={MdEditCalendar} color={'white'} fontSize="1.5em" />
+											</Box>
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700/10 after:dark:from-sky-900 after:dark:via-[#0141ff]/40 before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+											<Text fontSize="2xl" as="b" pr={2}>
+												0
+											</Text>
+											<Text fontSize="sm">Brouillon(s)</Text>
+										</Flex>
+										<Divider orientation="vertical" h={'50px'} />
+										<Flex alignItems={'center'}>
+											<Box
+												display="flex"
+												alignItems="center"
+												justifyContent="center"
+												w="12"
+												h="12"
+												backgroundColor="#292448"
+												borderRadius="50%"
+												mr={4}>
+												<Icon as={MdCalendarMonth} color={'white'} fontSize="1.5em" />
+											</Box>
 
-      <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
+											<Text fontSize="2xl" as="b" pr={2}>
+												0
+											</Text>
+											<Text fontSize="sm">Planning(s) publier</Text>
+										</Flex>
+									</Flex>
+								</CardBody>
+							</Card>
+						</Box>
+						<Box flex={1}>
+							<Heading
+								size="md"
+								color={'#292448'}
+								marginBottom={4}
+								minH={'40px'}
+								display={'flex'}
+								alignItems={'center'}
+								justifyContent={'space-between'}>
+								Collaborateurs{' '}
+								<Button
+									background="none"
+									color="#292448"
+									border="2px solid #292448"
+									borderRadius={20}
+									size="md"
+									fontSize={'1rem'}
+									className="justify-self-end">
+									Gérer
+								</Button>
+							</Heading>
+							<Card p={4} borderRadius={'8px'}>
+								<CardBody>
+									<Flex justifyContent={'space-between'} alignItems={'center'}>
+										<Flex alignItems={'center'}>
+											<Box
+												display="flex"
+												alignItems="center"
+												justifyContent="center"
+												w="12"
+												h="12"
+												backgroundColor="#292448"
+												borderRadius="50%"
+												mr={4}>
+												<Icon as={FiUsers} color={'white'} fontSize="1.5em" />
+											</Box>
+											<Text fontSize="2xl" as="b" pr={2}>
+												0
+											</Text>
+											<Text fontSize="sm">Collaborateur(s)</Text>
+										</Flex>
+										<Divider orientation="vertical" h={'50px'} />
+										<Flex alignItems={'center'}>
+											<Box
+												display="flex"
+												alignItems="center"
+												justifyContent="center"
+												w="12"
+												h="12"
+												backgroundColor="#292448"
+												borderRadius="50%"
+												mr={4}>
+												<Icon as={MdGroups} color={'white'} fontSize="1.5em" />
+											</Box>
+											<Text fontSize="2xl" as="b" pr={2}>
+												0
+											</Text>
+											<Text fontSize="sm">Equipes</Text>
+										</Flex>
+									</Flex>
+								</CardBody>
+							</Card>
+						</Box>
+						<Box flex={1}>
+							<Heading
+								size="md"
+								color={'#292448'}
+								marginBottom={4}
+								display={'flex'}
+								minH={'40px'}
+								alignItems={'center'}
+								justifyContent={'space-between'}>
+								Planning du jour
+							</Heading>
+							<Card p={4} borderRadius={'8px'}>
+								<CardBody></CardBody>
+							</Card>
+						</Box>
+					</Flex>
+				</Box>
+				<Box h={'100%'} pt={14} className="w-full">
+					<Heading size="md" color={'#292448'} marginBottom={4}>
+						Vos derniers plannings
+					</Heading>
+					<Card>
+						<CardBody>
+							<TableContainer>
+								<Table variant="simple">
+									<Thead>
+										<Tr>
+											<Th>Nom</Th>
+											<Th>Période</Th>
+											<Th>Equipe</Th>
+											<Th>Status</Th>
+											<Th>Créer le</Th>
+											<Th>Modifier le</Th>
+											<Th>Actions</Th>
+										</Tr>
+									</Thead>
+									<Tbody>
+										<Tr>
+											<Td>S1</Td>
+											<Td>01/05/2023 - 07/05/2023</Td>
+											<Td>Flins</Td>
+											<Td>
+												<Tag colorScheme="yellow">Brouillon</Tag>
+											</Td>
+											<Td>02/05/2023</Td>
+											<Td>04/05/2023</Td>
+											<Td>
+												<ButtonGroup>
+													<Button aria-label="Editer ce planning">
+														<MdEditDocument size={'1.5em'} />
+													</Button>
+													<Button aria-label="Effacer ce planning">
+														<MdDeleteForever size={'1.5em'} />
+													</Button>
+													<Button aria-label="Télécharger ce planning">
+														<MdOutlineFileDownload size={'1.5em'} />
+													</Button>
+												</ButtonGroup>
+											</Td>
+										</Tr>
+										<Tr>
+											<Td>S2</Td>
+											<Td>01/05/2023 - 07/05/2023</Td>
+											<Td>Flins</Td>
+											<Td>
+												<Tag colorScheme="green">Publier</Tag>
+											</Td>
+											<Td>02/05/2023</Td>
+											<Td>04/05/2023</Td>
+											<Td>
+												<ButtonGroup>
+													<Button aria-label="Editer ce planning">
+														<MdEditDocument size={'1.5em'} />
+													</Button>
+													<Button aria-label="Effacer ce planning">
+														<MdDeleteForever size={'1.5em'} />
+													</Button>
+													<Button aria-label="Télécharger ce planning">
+														<MdOutlineFileDownload size={'1.5em'} />
+													</Button>
+												</ButtonGroup>
+											</Td>
+										</Tr>
+										<Tr>
+											<Td>S3</Td>
+											<Td>01/05/2023 - 07/05/2023</Td>
+											<Td>Flins</Td>
+											<Td>
+												<Tag colorScheme="green">Publier</Tag>
+											</Td>
+											<Td>02/05/2023</Td>
+											<Td>04/05/2023</Td>
+											<Td>
+												<ButtonGroup>
+													<Button aria-label="Editer ce planning">
+														<MdEditDocument size={'1.5em'} />
+													</Button>
+													<Button aria-label="Effacer ce planning">
+														<MdDeleteForever size={'1.5em'} />
+													</Button>
+													<Button aria-label="Télécharger ce planning">
+														<MdOutlineFileDownload size={'1.5em'} />
+													</Button>
+												</ButtonGroup>
+											</Td>
+										</Tr>
+										<Tr>
+											<Td>S4</Td>
+											<Td>01/05/2023 - 07/05/2023</Td>
+											<Td>Flins</Td>
+											<Td>
+												<Tag colorScheme="yellow">Brouillon</Tag>
+											</Td>
+											<Td>02/05/2023</Td>
+											<Td>04/05/2023</Td>
+											<Td>
+												<ButtonGroup>
+													<Button aria-label="Editer ce planning">
+														<MdEditDocument size={'1.5em'} />
+													</Button>
+													<Button aria-label="Effacer ce planning">
+														<MdDeleteForever size={'1.5em'} />
+													</Button>
+													<Button aria-label="Télécharger ce planning">
+														<MdOutlineFileDownload size={'1.5em'} />
+													</Button>
+												</ButtonGroup>
+											</Td>
+										</Tr>
+										<Tr>
+											<Td>S5</Td>
+											<Td>01/05/2023 - 07/05/2023</Td>
+											<Td>Flins</Td>
+											<Td>
+												<Tag colorScheme="green">Publier</Tag>
+											</Td>
+											<Td>02/05/2023</Td>
+											<Td>-</Td>
+											<Td>
+												<ButtonGroup>
+													<Button aria-label="Editer ce planning">
+														<MdEditDocument size={'1.5em'} />
+													</Button>
+													<Button aria-label="Effacer ce planning">
+														<MdDeleteForever size={'1.5em'} />
+													</Button>
+													<Button aria-label="Télécharger ce planning">
+														<MdOutlineFileDownload size={'1.5em'} />
+													</Button>
+												</ButtonGroup>
+											</Td>
+										</Tr>
+									</Tbody>
+								</Table>
+							</TableContainer>
+						</CardBody>
+						<CardFooter>Pagination...</CardFooter>
+					</Card>
+				</Box>
+			</Box>
+		</>
+	);
+}
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Discover and deploy boilerplate example Next.js&nbsp;projects.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+export async function getStaticProps() {
+	return {
+		props: {
+			title: 'Dashboard',
+			breadcrumbs: [
+				{ title: 'Accueil', current: false },
+				{ title: 'Dashboard', href: '', current: true }
+			]
+		}
+	};
 }
