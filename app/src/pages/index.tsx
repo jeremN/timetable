@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import NextLink from 'next/link';
 import {
 	Heading,
 	Flex,
@@ -26,7 +25,6 @@ import {
 	MdCalendarMonth,
 	MdDeleteForever,
 	MdEditDocument,
-	MdOutlineAdd,
 	MdOutlineFileDownload,
 	MdEditCalendar,
 	MdGroups

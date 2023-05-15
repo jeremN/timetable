@@ -23,9 +23,11 @@ export interface TeammateEntity {
 
 type TeammatesFormProps = {
 	values?: TeammateEntity;
+	onSubmitCb: (...args: any) => void;
+	onCancelCb: (...args: any) => void;
 };
 
-const TeammatesForm: React.FC<TeammatesFormProps> = ({ values }) => {
+const TeammatesForm: React.FC<TeammatesFormProps> = ({ values, onSubmitCb, onCancelCb }) => {
 	const initialValues: TeammateEntity = {
 		firstname: '',
 		lastname: '',
@@ -43,8 +45,9 @@ const TeammatesForm: React.FC<TeammatesFormProps> = ({ values }) => {
 				initialValues={initialValues}
 				onSubmit={values => {
 					alert(JSON.stringify(values, null, 2));
+					onSubmitCb();
 				}}>
-				{({ handleSubmit, errors, touched }) => (
+				{({ handleSubmit, errors, touched, isSubmitting }) => (
 					<form onSubmit={handleSubmit}>
 						<HStack spacing={4} align="flex-start">
 							<FormControl isInvalid={!!errors.firstname && touched.firstname}>
@@ -117,10 +120,10 @@ const TeammatesForm: React.FC<TeammatesFormProps> = ({ values }) => {
 						</HStack>
 						<Box pt={14}>
 							<ButtonGroup display="flex">
-								<Button type="reset" flex="1">
+								<Button type="reset" flex="1" onClick={onCancelCb} disabled={isSubmitting}>
 									Annuler
 								</Button>
-								<Button type="submit" colorScheme="purple" flex="1">
+								<Button type="submit" colorScheme="purple" flex="1" disabled={isSubmitting}>
 									Créer
 								</Button>
 							</ButtonGroup>

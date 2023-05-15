@@ -3,7 +3,6 @@ import Head from 'next/head';
 
 import {
 	Heading,
-	Flex,
 	Card,
 	CardBody,
 	Box,
@@ -21,27 +20,22 @@ import {
 	Tag,
 	Divider,
 	CardFooter,
-	Icon,
 	Drawer,
 	DrawerBody,
 	DrawerCloseButton,
 	DrawerContent,
-	DrawerFooter,
 	DrawerHeader,
 	DrawerOverlay,
-	Input,
 	useDisclosure,
 	HStack,
-	Spacer
+	Flex,
+	List,
+	Select
 } from '@chakra-ui/react';
 import {
-	MdCalendarMonth,
 	MdDeleteForever,
 	MdEditDocument,
-	MdOutlineAdd,
 	MdOutlineFileDownload,
-	MdEditCalendar,
-	MdGroups,
 	MdAddCircleOutline
 } from 'react-icons/md';
 import TeammatesForm from '@/components/forms/teammatesForm';
@@ -49,8 +43,22 @@ import TeamForm from '@/components/forms/teamForm';
 
 type FormName = 'none' | 'team' | 'teammate';
 
+type TeamEntity = { id: string; title: string; color: string };
+
+type TableFilters = { teams: TeamEntity[]; role: 'admin' | 'viewer' | ''; itemsPerPage: number };
+
+const DEFAULT_ITEM_PER_PAGE_ARRAY = [10, 25, 50, 100];
+
 export default function Teammates() {
 	const [formName, setFormName] = React.useState<FormName>('none');
+	const [filters, setFilters] = React.useState<TableFilters>({
+		teams: [
+			{ id: '11', title: 'Flins', color: 'yellow' },
+			{ id: '22', title: 'Plaisir', color: 'purple' }
+		],
+		role: '',
+		itemsPerPage: 10
+	});
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const btnRef = React.useRef(null);
 
@@ -65,8 +73,32 @@ export default function Teammates() {
 	};
 
 	const formChildrens = {
-		team: { title: 'Créer une équipe', component: <TeamForm /> },
-		teammate: { title: 'Créer une collaboratrice', component: <TeammatesForm /> },
+		team: {
+			title: 'Créer une équipe',
+			component: (
+				<TeamForm
+					onSubmitCb={() => {
+						onClose();
+					}}
+					onCancelCb={() => {
+						onClose();
+					}}
+				/>
+			)
+		},
+		teammate: {
+			title: 'Créer une collaboratrice',
+			component: (
+				<TeammatesForm
+					onSubmitCb={() => {
+						onClose();
+					}}
+					onCancelCb={() => {
+						onClose();
+					}}
+				/>
+			)
+		},
 		none: { title: '', component: <></> }
 	};
 
@@ -115,10 +147,47 @@ export default function Teammates() {
 					</Heading>
 					<Card>
 						<CardHeader display="flex" alignItems="center">
-							<Divider orientation="vertical" h="40px" ml={4} mr={4} />
-							<HStack>
-								<Text>filtre(s)</Text>
-							</HStack>
+							<Flex>
+								<HStack flex={1}>
+									<Text fontSize="sm" fontWeight="bold">
+										Equipes :
+									</Text>
+									<List>
+										{filters.teams.map((team, index) => (
+											<Tag
+												as={'button'}
+												mr={1}
+												key={team?.id ?? index}
+												colorScheme={team?.color ?? 'yellow'}>
+												{team.title}
+											</Tag>
+										))}
+									</List>
+								</HStack>
+								<Divider orientation="vertical" h="40px" ml={4} mr={4} borderColor="#292448" />
+								<HStack flex={1}>
+									<Text fontSize="sm" fontWeight="bold">
+										Elements par page :
+									</Text>
+									<Select size="sm" borderRadius={8} defaultValue={filters.itemsPerPage}>
+										{DEFAULT_ITEM_PER_PAGE_ARRAY.map((item, index) => (
+											<option key={index} value={item}>
+												{item}
+											</option>
+										))}
+									</Select>
+								</HStack>
+								<Divider orientation="vertical" h="40px" ml={4} mr={4} borderColor="#292448" />
+								<HStack flex={1}>
+									<Text fontSize="sm" fontWeight="bold">
+										Filtrer par rôle
+									</Text>
+									<Select size="sm" borderRadius={8}>
+										<option value="admin">Admin</option>
+										<option value="viewer">Viewer</option>
+									</Select>
+								</HStack>
+							</Flex>
 						</CardHeader>
 						<CardBody>
 							<TableContainer>
