@@ -68,7 +68,7 @@ export default function Home() {
 									background="none"
 									color="#292448"
 									border="2px solid #292448"
-									borderRadius={20}
+									borderRadius="md"
 									size="md"
 									fontSize={'1rem'}
 									className="justify-self-end">
@@ -90,7 +90,6 @@ export default function Home() {
 												mr={4}>
 												<Icon as={MdEditCalendar} color={'white'} fontSize="1.5em" />
 											</Box>
-
 											<Text fontSize="2xl" as="b" pr={2}>
 												0
 											</Text>
@@ -109,11 +108,10 @@ export default function Home() {
 												mr={4}>
 												<Icon as={MdCalendarMonth} color={'white'} fontSize="1.5em" />
 											</Box>
-
 											<Text fontSize="2xl" as="b" pr={2}>
 												0
 											</Text>
-											<Text fontSize="sm">Planning(s) publier</Text>
+											<Text fontSize="sm">Publier</Text>
 										</Flex>
 									</Flex>
 								</CardBody>
@@ -133,7 +131,7 @@ export default function Home() {
 									background="none"
 									color="#292448"
 									border="2px solid #292448"
-									borderRadius={20}
+									borderRadius="md"
 									size="md"
 									fontSize={'1rem'}
 									className="justify-self-end">
@@ -207,7 +205,7 @@ export default function Home() {
 						<CardBody>
 							<TableContainer>
 								<Table variant="simple">
-									<Thead>
+									<Thead backgroundColor="#f5f6fa">
 										<Tr>
 											<Th>Nom</Th>
 											<Th>Période</Th>
@@ -350,6 +348,7 @@ export async function getStaticProps() {
 	return {
 		props: {
 			title: 'Dashboard',
+			currentPage: 'dashboard',
 			breadcrumbs: [
 				{ title: 'Accueil', current: false },
 				{ title: 'Dashboard', href: '', current: true }
