@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  app:
+    container_name: timetable_app
+    build:
+      context: .
+      dockerfile: ./app/docker/dockerfile
+    restart: always
+    env_file: .env
+    ports:
+      - ${APP_PORT}
+    volumes:
+      - .:/usr/src/app
+  api:
+    container_name: timetable_api
+    build:
+      context: .
+      dockerfile: ./api/docker/dockerfile
+    restart: always
+    env_file: .env
+    ports:
+      - ${API_PORT}:${API_PORT}
+    volumes:
+      - .:/usr/src/api
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres
+    container_name: timetable_db
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+
+networks:
+  tt-network:
+    driver: bridge
