@@ -4,26 +4,26 @@ services:
   app:
     container_name: timetable_app
     build:
-      context: .
-      dockerfile: ./app/docker/dockerfile
+      context: ./app
+      dockerfile: .docker/Dockerfile
     restart: always
     env_file: .env
     ports:
       - 3000:3000
     volumes:
-      - .:/usr/src/app
+      - ./app:/usr/src/app
 
   api:
     container_name: timetable_api
     build:
-      context: .
-      dockerfile: ./api/docker/dockerfile
+      context: ./api
+      dockerfile: .docker/Dockerfile
     restart: always
     env_file: .env
     ports:
       - 4000:3000
     volumes:
-      - .:/usr/src/api
+      - ./api:/usr/src/api
     depends_on:
       - postgres
 
