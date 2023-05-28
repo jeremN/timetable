@@ -1,6 +1,7 @@
 import {
 	IsArray,
 	IsBoolean,
+	IsDate,
 	IsEmail,
 	IsNumber,
 	IsObject,
@@ -9,8 +10,8 @@ import {
 } from 'class-validator';
 
 export class UserDto {
-	@IsNumber()
-	id: number;
+	@IsString()
+	id: string;
 
 	@IsEmail()
 	email: string;
@@ -20,16 +21,16 @@ export class UserDto {
 	password: string;
 
 	@IsString()
-	firstname: string;
+	firstName: string;
 
 	@IsString()
-	lastname: string;
+	lastName: string;
 
 	@IsBoolean()
 	verified: boolean;
 
 	@IsArray()
-	team: number[];
+	team: string[];
 
 	@IsString()
 	role: string;
@@ -41,7 +42,7 @@ export class UserDto {
 	contract: string;
 
 	@IsArray()
-	plannings: number[];
+	plannings: string[];
 
 	@IsNumber()
 	hours: number;
@@ -49,9 +50,15 @@ export class UserDto {
 	@IsObject()
 	settings: any;
 
-	@IsString()
-	created_date: string;
+	@IsDate()
+	createdDate: Date;
+
+	@IsDate()
+	updatedDate: Date;
 
 	@IsString()
-	updated_date: string;
+	dayOff: string;
+
+	@IsNumber()
+	daysPerWeek: number;
 }
