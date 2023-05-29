@@ -3,16 +3,14 @@ import {
 	IsBoolean,
 	IsDate,
 	IsEmail,
+	IsJSON,
 	IsNumber,
-	IsObject,
+	IsOptional,
 	IsString,
-	MinLength
+	MinLength,
 } from 'class-validator';
 
 export class UserDto {
-	@IsString()
-	id: string;
-
 	@IsEmail()
 	email: string;
 
@@ -21,40 +19,42 @@ export class UserDto {
 	password: string;
 
 	@IsString()
+	role: string;
+
+	@IsString()
 	firstName: string;
 
 	@IsString()
 	lastName: string;
 
-	@IsBoolean()
-	verified: boolean;
+	@IsString()
+	job: string;
 
 	@IsArray()
 	team: string[];
 
-	@IsString()
-	role: string;
+	@IsOptional()
+	@IsDate()
+	createdDate?: Date;
 
-	@IsString()
-	job: string;
+	@IsOptional()
+	@IsDate()
+	updatedDate?: Date;
 
-	@IsString()
-	contract: string;
+	@IsBoolean()
+	verified: boolean;
+
+	@IsJSON()
+	settings: JSON;
 
 	@IsArray()
 	plannings: string[];
 
+	@IsString()
+	contract: string;
+
 	@IsNumber()
 	hours: number;
-
-	@IsObject()
-	settings: any;
-
-	@IsDate()
-	createdDate: Date;
-
-	@IsDate()
-	updatedDate: Date;
 
 	@IsString()
 	dayOff: string;

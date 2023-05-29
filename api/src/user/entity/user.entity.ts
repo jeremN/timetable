@@ -3,7 +3,7 @@ import {
 	CreateDateColumn,
 	Entity,
 	PrimaryGeneratedColumn,
-	UpdateDateColumn
+	UpdateDateColumn,
 } from 'typeorm';
 
 @Entity()
@@ -21,7 +21,7 @@ export class UserEntity {
 		nullable: false,
 		type: 'enum',
 		enum: ['admin', 'viewer', 'editor'],
-		default: 'viewer'
+		default: 'viewer',
 	})
 	role: string;
 
@@ -34,27 +34,30 @@ export class UserEntity {
 	@Column({ nullable: true })
 	job: string;
 
-	@Column({ nullable: false }) // ManyToOne or OneToMany
+	@Column('text', { nullable: false, array: true, default: [] }) // ManyToOne or OneToMany
 	team: string[];
 
 	@CreateDateColumn({
 		nullable: false,
 		name: 'created_date',
-		type: 'timestamp'
+		type: 'timestamptz',
 	})
 	createdDate: Date;
 
 	@UpdateDateColumn({
 		nullable: false,
 		name: 'updated_date',
-		type: 'timestamp'
+		type: 'timestamptz',
 	})
 	updatedDate: Date;
 
-	@Column({ nullable: false })
-	setting: object;
+	@Column({ nullable: false, default: false })
+	verified: boolean;
 
-	@Column({ nullable: false }) // ManyToOne or OneToMany
+	@Column({ nullable: false, type: 'json' })
+	settings: JSON;
+
+	@Column('text', { nullable: false, array: true, default: [] }) // ManyToOne or OneToMany
 	plannings: string[];
 
 	@Column({ nullable: true })
