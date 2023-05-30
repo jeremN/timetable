@@ -1,3 +1,4 @@
+import { Type } from 'class-transformer';
 import {
 	IsArray,
 	IsBoolean,
@@ -7,10 +8,17 @@ import {
 	IsNumber,
 	IsOptional,
 	IsString,
+	IsUUID,
 	MinLength,
+	ValidateNested
 } from 'class-validator';
+import { PlanningEntity } from 'src/planning/planning.entity';
+import { TeamEntity } from 'src/team/team.entity';
 
 export class UserDto {
+	@IsUUID()
+	id: string;
+
 	@IsEmail()
 	email: string;
 
@@ -31,7 +39,9 @@ export class UserDto {
 	job: string;
 
 	@IsArray()
-	team: string[];
+	@ValidateNested({ each: true })
+	@Type(() => TeamEntity)
+	team: TeamEntity[];
 
 	@IsOptional()
 	@IsDate()
@@ -48,7 +58,9 @@ export class UserDto {
 	settings: JSON;
 
 	@IsArray()
-	plannings: string[];
+	@ValidateNested({ each: true })
+	@Type(() => PlanningEntity)
+	plannings: PlanningEntity[];
 
 	@IsString()
 	contract: string;

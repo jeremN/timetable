@@ -1,7 +1,11 @@
+import { PlanningEntity } from 'src/planning/planning.entity';
+import { TeamEntity } from 'src/team/team.entity';
 import {
 	Column,
 	CreateDateColumn,
 	Entity,
+	ManyToOne,
+	OneToMany,
 	PrimaryGeneratedColumn,
 	UpdateDateColumn,
 } from 'typeorm';
@@ -21,7 +25,7 @@ export class UserEntity {
 		nullable: false,
 		type: 'enum',
 		enum: ['admin', 'viewer', 'editor'],
-		default: 'viewer',
+		default: 'viewer'
 	})
 	role: string;
 
@@ -34,20 +38,20 @@ export class UserEntity {
 	@Column({ nullable: true })
 	job: string;
 
-	@Column('text', { nullable: false, array: true, default: [] }) // ManyToOne or OneToMany
-	team: string[];
+	@ManyToOne(() => TeamEntity, (team) => team.id)
+	team: TeamEntity[];
 
 	@CreateDateColumn({
 		nullable: false,
 		name: 'created_date',
-		type: 'timestamptz',
+		type: 'timestamptz'
 	})
 	createdDate: Date;
 
 	@UpdateDateColumn({
 		nullable: false,
 		name: 'updated_date',
-		type: 'timestamptz',
+		type: 'timestamptz'
 	})
 	updatedDate: Date;
 
@@ -57,8 +61,8 @@ export class UserEntity {
 	@Column({ nullable: false, type: 'json' })
 	settings: JSON;
 
-	@Column('text', { nullable: false, array: true, default: [] }) // ManyToOne or OneToMany
-	plannings: string[];
+	@OneToMany(() => PlanningEntity, (planning) => planning.createdBy)
+	plannings: PlanningEntity[];
 
 	@Column({ nullable: true })
 	contract: string | null;

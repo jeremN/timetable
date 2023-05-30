@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { UserDto } from './dto/user.dto';
+import { UserDto } from './user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UserEntity } from './entity/user.entity';
+import { UserEntity } from './user.entity';
 import { Repository } from 'typeorm';
 
 // TODO: options from query string
@@ -11,7 +11,7 @@ export class UserService {
 		@InjectRepository(UserEntity)
 		private userRepository: Repository<UserEntity>
 	) {}
-	create(user: UserDto): Promise<UserEntity> {
+	create(user: UserDto) {
 		return this.userRepository.save(user);
 	}
 

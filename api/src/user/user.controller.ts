@@ -8,12 +8,13 @@ import {
 	Put,
 } from '@nestjs/common';
 import { UserService } from './user.service';
-import { UserDto } from './dto/user.dto';
-import { UserEntity } from './entity/user.entity';
+import { UserDto } from './user.dto';
+import { UserEntity } from './user.entity';
 
 @Controller('users')
 export class UserController {
 	constructor(private userService: UserService) {}
+	
 	@Post()
 	create(@Body() user: UserDto): Promise<UserEntity> {
 		return this.userService.create(user);
@@ -30,12 +31,12 @@ export class UserController {
 	}
 
 	@Put('/users/:id')
-	update(@Param('id') id: string) {
-		return this.userService.
+	update(@Param('id') id: string, @Body() user: UserDto) {
+		return this.userService.update(id, { ...user });
 	}
 
 	@Delete('/users/:id')
 	remove(@Param('id') id: string) {
-		return 'This will remove a user by id';
+		return this.userService.remove(id);
 	}
 }
