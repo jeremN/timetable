@@ -5,6 +5,7 @@ import {
 	IsNotEmpty,
 	IsOptional,
 	IsString,
+	ValidateIf,
 	ValidateNested,
 } from 'class-validator';
 import { PlanningEntity } from 'src/planning/planning.entity';
@@ -19,7 +20,8 @@ export class TeamDto {
 	@IsNotEmpty()
 	title: string;
 
-	@IsNotEmpty()
+	@ValidateIf((object, value) => value !== null)
+	@IsString()
 	localization: string | null;
 
 	@IsArray()

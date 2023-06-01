@@ -23,8 +23,11 @@ export class TeamService {
 		return this.teamRepository.find({ where: { id } });
 	}
 
-	update(id: string, team: Partial<TeamDto>) {
-		return this.teamRepository.update(id, { ...team });
+	async update(id: string, team: Partial<TeamDto>) {
+		const teamToUpdate = await this.teamRepository.findOneBy({ id });
+		Object.assign(teamToUpdate, { ...team });
+
+		return this.teamRepository.save(teamToUpdate);
 	}
 
 	remove(id: string) {
