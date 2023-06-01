@@ -7,7 +7,7 @@ import {
 	ManyToOne,
 	OneToMany,
 	PrimaryGeneratedColumn,
-	UpdateDateColumn,
+	UpdateDateColumn
 } from 'typeorm';
 
 @Entity()
@@ -18,7 +18,7 @@ export class UserEntity {
 	@Column({ nullable: false, unique: true, type: 'varchar' })
 	email: string;
 
-	@Column({ nullable: true, unique: true, type: 'varchar' })
+	@Column({ nullable: true, type: 'varchar' })
 	password: string;
 
 	@Column({
@@ -38,7 +38,7 @@ export class UserEntity {
 	@Column({ nullable: true })
 	job: string;
 
-	@ManyToOne(() => TeamEntity, (team) => team.id)
+	@ManyToOne(() => TeamEntity, team => team.id)
 	team: TeamEntity[];
 
 	@CreateDateColumn({
@@ -61,7 +61,9 @@ export class UserEntity {
 	@Column({ nullable: false, type: 'json' })
 	settings: JSON;
 
-	@OneToMany(() => PlanningEntity, (planning) => planning.createdBy)
+	@OneToMany(() => PlanningEntity, planning => planning.createdBy, {
+		eager: true
+	})
 	plannings: PlanningEntity[];
 
 	@Column({ nullable: true })

@@ -23,7 +23,7 @@ export class TeamService {
 		return this.teamRepository.find({ where: { id } });
 	}
 
-	update(id: string, team: TeamDto) {
+	update(id: string, team: Partial<TeamDto>) {
 		return this.teamRepository.update(id, { ...team });
 	}
 

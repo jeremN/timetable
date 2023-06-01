@@ -23,8 +23,15 @@ export class UserService {
 		return this.userRepository.find({ where: { id } });
 	}
 
-	update(id: string, user: UserDto) {
-		return this.userRepository.update(id, { ...user });
+	async update(id: string, user: UserDto) {
+		console.log('update', id, user);
+		const { updatedDate, ...rest } = await this.userRepository.findOneBy({
+			id,
+		});
+
+		Object.assign(rest, { ...user });
+
+		return this.userRepository.save(rest);
 	}
 
 	remove(id: string) {

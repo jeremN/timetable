@@ -4,9 +4,10 @@ import {
 	Column,
 	CreateDateColumn,
 	Entity,
+	JoinColumn,
 	ManyToOne,
 	PrimaryGeneratedColumn,
-	UpdateDateColumn
+	UpdateDateColumn,
 } from 'typeorm';
 
 @Entity()
@@ -23,21 +24,25 @@ export class PlanningEntity {
 	@CreateDateColumn({
 		nullable: false,
 		name: 'created_date',
-		type: 'timestamptz'
+		type: 'timestamptz',
 	})
 	createdDate: Date;
 
 	@UpdateDateColumn({
 		nullable: false,
 		name: 'updated_date',
-		type: 'timestamptz'
+		type: 'timestamptz',
 	})
 	updatedDate: Date;
 
 	@Column({ nullable: false, type: 'json', default: {} })
 	blocks: JSON;
 
-	@ManyToOne(() => UserEntity, (user) => user.id)
+	@ManyToOne(() => UserEntity, (user) => user.id, {
+		cascade: true,
+		onDelete: 'CASCADE',
+		onUpdate: 'CASCADE',
+	})
 	createdBy: UserEntity;
 
 	@ManyToOne(() => TeamEntity, (team) => team.plannings)

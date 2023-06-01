@@ -1,3 +1,4 @@
+import { PartialType } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import {
 	IsArray,
@@ -10,8 +11,8 @@ import { PlanningEntity } from 'src/planning/planning.entity';
 import { UserEntity } from 'src/user/user.entity';
 
 export class TeamDto {
-	@IsString()
 	@IsOptional()
+	@IsString()
 	id: string;
 
 	@IsString()
@@ -33,3 +34,5 @@ export class TeamDto {
 	@Type(() => PlanningEntity)
 	plannings: PlanningEntity[];
 }
+
+export class PartialTeamDto extends PartialType(TeamDto) {}
